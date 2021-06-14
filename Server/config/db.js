@@ -18,7 +18,8 @@ async function db() {
   const WoodSchema = [
     {
       name: 'john',
-      body: 'jie',
+      lat: 'jie',
+      long: 'ja',
       date: {
         type: String,
         default: Date.now()

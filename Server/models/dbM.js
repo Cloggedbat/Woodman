@@ -7,10 +7,13 @@ var Schema = mongoose.Schema;
 
 var WoodSchema = new Schema({
     name: { type: String, required: false },
-    body: { type: String, required: false },
+    lat: { type: String, required: false },
+    long: { type: String, required: false },
+
     date: {
         type: String,
-        default: Date.now()
+        default: Date.now(),
+        required: false
     }
 
 });

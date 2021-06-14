@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const routes = require('./Server/routes')
 const PORT = process.env.PORT || 5000;
 // const db = require('./Server/config/db')
+var cors = require('cors')
+
 require('./Server/models/dbM')
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/GotWood', {
@@ -24,12 +26,14 @@ mongoose.connection.on('connected', () => {
 
 
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(morgan('tiny'))
+// app.use(morgan('tiny'))
 // app.use(routes)
-app.use('/api', routes)
-// app.use('/', db)
+
+app.use(routes)
+// app.use('/save', routes)
+app.use(cors()) // Use this after the variable declaration
 
 
 app.listen(PORT, () => {

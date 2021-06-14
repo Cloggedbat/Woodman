@@ -2,32 +2,33 @@
   "name": "woodman",
   "version": "1.0.0",
   "description": "",
-  "main": "mo_helper_test.js",
+  "main": "server.js",
   "directories": {
     "test": "test"
-  },
-  "dependencies": {
-    "bootstrap": "^5.0.1",
-    "concurrently": "^6.2.0",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.12.12",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.7",
-    "react": "^17.0.2",
-    "react-bootstrap": "^1.6.0",
-    "react-native-maps": "^0.28.0",
-    "react-scripts": "^4.0.3",
-    "start": "^5.1.0"
-  },
-  "devDependencies": {
-    "mocha": "^8.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd woodman && yarn start",
     "dev": "concurrently -n 'server, client' \"nodemon server.js\" \"npm run client\""
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cloggedbat/Woodman.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cloggedbat/Woodman/issues"
+  },
+  "homepage": "https://github.com/Cloggedbat/Woodman#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "i": "^0.3.6",
+    "mongoose": "^5.12.13",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "react-scripts": "^4.0.3"
+  }
 }
