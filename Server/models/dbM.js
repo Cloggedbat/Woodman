@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 
 var WoodSchema = new Schema({
     name: { type: String, required: false },
-    lat: { type: String, required: false },
-    long: { type: String, required: false },
+    lat: { type: Number, required: false },
+    lng: { type: Number, required: false },
 
     date: {
         type: String,
