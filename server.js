@@ -26,14 +26,14 @@ mongoose.connection.on('connected', () => {
 
 
 
-app.use(express.urlencoded({ extended: false }));
+app.use(cors()) // Use this after the variable declaration
 app.use(express.json());
-// app.use(morgan('tiny'))
+app.use(express.urlencoded({ extended: false }));
+app.use(morgan('tiny'))
 // app.use(routes)
 
 app.use(routes)
-// app.use('/save', routes)
-app.use(cors()) // Use this after the variable declaration
+app.use('/save', routes)
 
 
 app.listen(PORT, () => {

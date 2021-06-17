@@ -16,9 +16,18 @@ router.get('/api', (req, res) => {
 });
 router.post('/save', (req, res) => {
     console.log('body', req.body)
+    const data = req.body;
+    const newWoodData = new woodD(data);
+    newWoodData.save((error) => {
+        if (error) {
+            res.status(500).json({ msg: "error" })
+        } else {
+            res.json({
+                msg: 'got the data'
+            })
+            console.log("no error")
 
-    res.json({
-        msg: 'got the data'
+        }
     })
 });
 

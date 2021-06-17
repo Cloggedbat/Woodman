@@ -1,0 +1,6 @@
+.maps {
+    margin-Top: 50vw;
+    height: 50vw;
+    flex-direction: row;
+   align-Items: center;
+}
