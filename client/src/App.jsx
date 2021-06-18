@@ -6,6 +6,8 @@ import App2 from './Pages/Homepage';
 // needs to be moved into pages
 import forms from './Components/forms'
 import FireMapPage from './Pages/fireDataPage'
+import SignUp from './Pages/signUpform'
+
 function App() {
   return (
     <Router>
@@ -24,6 +26,7 @@ function App() {
           <Route exact path='/' component={App2} />
           <Route exact path='/forms' component={forms} />
           <Route exact path='/FireDanger' component={FireMapPage} />
+          <Route exact path='/SignUp' component={SignUp} />
 
         </Switch>
 
