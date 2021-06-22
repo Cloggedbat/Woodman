@@ -9,7 +9,8 @@ import {
 import mapStyles from "./mapStyles";
 // fix this import or create a variable that would be easier to "center the map", later can be updated to person location
 // import LOS_ANGELES_CENTER from './const/la_center.jsx';
-import iconMarker from "../assets/0-5481_campfire-clip-art-clipart-cliparting-campfire-icon-clipart.png"
+import iconMarker from "../assets/Campfire.png"
+
 import axios from 'axios'
 import './maps.css'
 
@@ -63,10 +64,8 @@ function Map() {
                 {places.map((places) => (
                     <Marker await
                         icon={{
-                            url: `https://waqi.info/mapicon/${statObj.aqi}.30.png`,
-                            anchor: new google.maps.Point(iw / 4, ih / 2 - 5),
-                            size: new google.maps.Size(iw / 2, ih / 2),
-                            scaledSize: new google.maps.Size(iw / 2, ih / 2),
+                            url: iconMarker,
+                            scaledSize: new window.google.maps.Size(25, 25)
                         }}
 
                         position={{
