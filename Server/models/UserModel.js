@@ -14,11 +14,11 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    firstName: {
-        type: String,
-        trim: true,
-        required: true
-    },
+    // firstName: {
+    //     type: String,
+    //     trim: true,
+    //     required: false
+    // },
     passwordHash: {
         type: String,
         required: true
