@@ -3,6 +3,10 @@ const router = express.Router();
 const User = require("../models/UserModel")
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
+
+
+// registering new accounts
 router.post('/', async (req, res) => {
     try {
         const { username, password, passwordVerify } = req.body;
@@ -42,13 +46,59 @@ router.post('/', async (req, res) => {
         const savedUser = await newUser.save()
         console.log(savedUser)
 
-        // login
+        // login with token
 
         const token = jwt.sign({
-            user: savedUser._id
+            user: savedUser._id,
         }, process.env.JWT_SECRET
         );
-        console.log(token, "token")
+        // console.log(token, "token")
+        // send token as cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+        })
+            .send();
+
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).send();
+    }
+    // console.log(email);
+});
+router.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        if (!username || !password)
+            // clean this up when we come to style*******************************************************
+            return res
+                .status(400)
+                .json({ errorMessage: "******Please enter all Req fields******" });
+
+        const existingUser = await User.findOne({ username })
+        if (!existingUser)
+            return res
+                .status(401)
+                .json({ errorMessage: "*****Wrong username or password*****" });
+        const passwordCorrect = await bcrypt.compare(password, existingUser.passwordHash)
+        if (!passwordCorrect)
+            return res
+                .status(401)
+                .json({ errorMessage: "*****Wrong username or password*****" });
+
+
+
+        const token = jwt.sign({
+            user: existingUser._id,
+        }, process.env.JWT_SECRET
+        );
+
+        // send token as cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+        })
+            .send();
 
 
     } catch (err) {
@@ -56,6 +106,18 @@ router.post('/', async (req, res) => {
         res.status(500).send();
     }
 
-    // console.log(email);
 });
+router.get("/logout", (req, res) => {
+    res.cookie('token', '', {
+        httpOnly: true,
+        expires: new Date(0)
+
+    })
+        .send();
+
+});
+
+
+
+
 module.exports = router;

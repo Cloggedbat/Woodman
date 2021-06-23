@@ -5,7 +5,9 @@ const app = express();
 const morgan = require('morgan');
 const routes = require('./Server/routes')
 const userRoute = require('./Server/routes/userRoute')
+const addWoodRoute = require('./Server/routes/userWoodR')
 const PORT = process.env.PORT || 5000;
+require('dotenv').config()
 // const db = require('./Server/config/db')
 var cors = require('cors')
 
@@ -38,7 +40,7 @@ app.use(morgan('tiny'))
 app.use(routes)
 app.use('/save', routes)
 app.use('/auth', userRoute)
-
+app.use('/addWood', addWoodRoute)
 app.listen(PORT, () => {
     console.log('app running on PORT: ' + PORT)
 })
