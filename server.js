@@ -22,7 +22,9 @@ mongoose.connection.on('connected', () => {
 })
 
 
-
+app.get('/test', (req, res) => {
+    res.send("that works")
+})
 
 
 
