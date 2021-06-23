@@ -78,12 +78,7 @@ function Map() {
                         onClick={() => {
                             setSelectedPark(places);
                         }}
-                    // icon={{
-                    //         url: `/skateboarding.svg`,
-                    //         scaledSize: new window.google.maps.Size(25, 25)
-                    //       }}
-                    //     />
-                    //   ))}
+
                     />))}{selectedPark && (
                         <InfoWindow
                             onCloseClick={() => {

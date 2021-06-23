@@ -4,6 +4,7 @@ const app = express();
 // const routes = require("./Server/routes/index")
 const morgan = require('morgan');
 const routes = require('./Server/routes')
+const userRoute = require('./Server/routes/userRoute')
 const PORT = process.env.PORT || 5000;
 // const db = require('./Server/config/db')
 var cors = require('cors')
@@ -22,11 +23,11 @@ mongoose.connection.on('connected', () => {
 })
 
 
-app.get('/test', (req, res) => {
-    res.send("that works")
-})
+// app.get('/test', (req, res) => {
+//     res.send("that works")
+// })
 
-
+// configured routes
 
 app.use(cors()) // Use this after the variable declaration
 app.use(express.json());
@@ -36,7 +37,7 @@ app.use(morgan('tiny'))
 
 app.use(routes)
 app.use('/save', routes)
-
+app.use('/auth', userRoute)
 
 app.listen(PORT, () => {
     console.log('app running on PORT: ' + PORT)
