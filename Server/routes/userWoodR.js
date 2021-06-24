@@ -3,11 +3,12 @@ const router = express.Router();
 var userWoodD = require("../models/userWoodM")
 // const bcrypt = require('bcryptjs');
 // const jwt = require('jsonwebtoken')
+const auth = require("../middleware/auth")
 require('dotenv').config()
 
 
 // registering new accounts
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     try {
         const { name, lat, lng } = req.body;
         const newUserWoodD = new userWoodD({
@@ -17,6 +18,15 @@ router.post('/', async (req, res) => {
         res.json(savedUserWoodD);
 
 
+    } catch (err) {
+        console.error(err)
+        res.status(500).send();
+    }
+});
+router.get('/', auth, async (req, res) => {
+    try {
+        const customerWood = await userWoodD.find();
+        res.json(customerWood)
     } catch (err) {
         console.error(err)
         res.status(500).send();
