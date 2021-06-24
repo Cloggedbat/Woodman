@@ -24,7 +24,7 @@ import cLand from '../assets/cLands.jpg'
 
 
 
-const App2 = () => {
+const logdInUser = () => {
 
 
     return (
@@ -108,4 +108,4 @@ const styles = {
     }
 }
 
-export default App2;
+export default logdInUser;

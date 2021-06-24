@@ -14,44 +14,40 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    // firstName: {
-    //     type: String,
-    //     trim: true,
-    //     required: false
-    // },
+    firstName: {
+        type: String,
+        trim: true,
+        required: false
+    },
     passwordHash: {
         type: String,
         required: true
-    }
-    // lastName: {
-    //     type: String,
-    //     trim: true,
-    //     required: true
-    // },
-    // address1: {
-    //     type: String,
-    //     trim: true,
-    //     required: true
-    // },
-    // address2: {
-    //     type: String,
-    //     trim: true
-    // },
-    // city: {
-    //     type: String,
-    //     trim: true,
-    //     required: true
-    // },
-    // state: {
-    //     type: String,
-    //     trim: true,
-    //     required: true
-    // },
-    // zipCode: {
-    //     type: Number,
-    //     trim: true,
-    //     required: true
-    // },
+    },
+    lastName: {
+        type: String,
+        trim: true,
+        required: false
+    },
+    address1: {
+        type: String,
+        trim: true,
+        required: false
+    },
+    city: {
+        type: String,
+        trim: true,
+        required: false
+    },
+    state: {
+        type: String,
+        trim: true,
+        required: false
+    },
+    zipCode: {
+        type: Number,
+        trim: true,
+        required: false
+    },
     // uuid: {
     //     type: String,
     //     required: true

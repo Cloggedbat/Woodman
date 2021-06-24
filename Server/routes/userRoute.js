@@ -7,11 +7,11 @@ require('dotenv').config()
 
 
 // registering new accounts
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
-        const { username, password, passwordVerify } = req.body;
+        const { username, password, passwordVerify, firstName, lastName } = req.body;
         // validations
-        if (!username || !password || !passwordVerify)
+        if (!username || !password || !firstName || !lastName)
 
             // clean this up when we come to style*******************************************************
 

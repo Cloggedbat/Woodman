@@ -50,13 +50,12 @@ const SignUp = () => {
         username: usernameValue,
         password: passwordValue,
         streetAddress1: streetAddress1Value,
-        streetAddress2: streetAddress2Value,
         city: cityValue,
         state: stateValue,
         zipCode: zipCodeValue
       }
       console.log(userObj);
-      axios.post("/api/signup",
+      axios.post("/auth/register",
         userObj
       ).then((res) => {
         console.log("Successfully registered!");
@@ -87,7 +86,7 @@ const SignUp = () => {
     <>
 
       <Container id="main-container">
-      
+
         <Jumbotron id="signup-jumbotron">
           <h1 id="pi">Personal Information</h1>
           <hr />
