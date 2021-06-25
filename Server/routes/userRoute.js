@@ -7,64 +7,77 @@ require('dotenv').config()
 
 
 // registering new accounts
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        const { username, password, passwordVerify, firstName, lastName } = req.body;
+        const { username, password, passwordVerify } = req.body;
         // validations
-        if (!username || !password || !firstName || !lastName)
+        if (!username || !password || !passwordVerify)
 
             // clean this up when we come to style*******************************************************
 
             return res
                 .status(400)
-                .json({ errorMessage: "******Please enter all Req fields******" });
+                .json({ errorMessage: "Please enter all required fields." });
 
         if (password.length < 6)
-            return res
-                .status(400)
-                .json({ errorMessage: "******Please enter all more then 6 characters******" });
+            return res.status(400).json({
+
+                errorMessage: "Please enter a password of at least 6 characters.",
+
+
+            });
 
         if (password !== passwordVerify)
-            return res
-                .status(400)
-                .json({ errorMessage: "******Please enter all more then 6 characters******" });
+            return res.status(400).json({
+                errorMessage: "Please enter the same password twice.",
+            });
 
-
-        const existingUser = await User.findOne({ username })
+        const existingUser = await User.findOne({ username });
         if (existingUser)
-            return res
-                .status(400)
-                .json({ errorMessage: "******account exists******" });
-        // PW hash
+            return res.status(400).json({
+                errorMessage: "An account with this email already exists.",
+            });
+
+
+
+        // hash the password
+
         const salt = await bcrypt.genSalt();
-        const passwordHash = await bcrypt.hash(password, salt)
-        console.log(passwordHash)
+        const passwordHash = await bcrypt.hash(password, salt);
+
+        // save a new user account to the db
 
         const newUser = new User({
-            username, passwordHash
+            username: username,
+            passwordHash: passwordHash
+
         });
-        const savedUser = await newUser.save()
-        console.log(savedUser)
 
-        // login with token
+        const savedUser = await newUser.save();
 
-        const token = jwt.sign({
-            user: savedUser._id,
-        }, process.env.JWT_SECRET
+        // sign the token
+
+        const token = jwt.sign(
+            {
+                user: savedUser._id,
+            },
+            process.env.JWT_SECRET
         );
-        // console.log(token, "token")
-        // send token as cookie
-        res.cookie('token', token, {
-            httpOnly: true,
-        })
+        console.log(token, 'ewe')
+
+        // send the token in a HTTP-only cookie
+
+        res
+            .cookie("token", token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+            })
             .send();
-
-
     } catch (err) {
-        console.error(err)
+        console.error(err, 'wtf');
         res.status(500).send();
     }
-    // console.log(email);
 });
 router.post('/login', async (req, res) => {
     try {
@@ -102,7 +115,7 @@ router.post('/login', async (req, res) => {
 
 
     } catch (err) {
-        console.error(err)
+        console.error(err, 'what the fuck')
         res.status(500).send();
     }
 
