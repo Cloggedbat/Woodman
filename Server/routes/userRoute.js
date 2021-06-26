@@ -79,7 +79,7 @@ router.post('/', async (req, res) => {
         res.status(500).send();
     }
 });
-router.post('/login', async (req, res) => {
+router.post('/log', async (req, res) => {
     try {
         const { username, password } = req.body;
 
