@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
-// import {
-//     withGoogleMap,
-//     withScriptjs,
-//     GoogleMap,
-//     Marker,
-//     InfoWindow
-// } from "react-google-maps";
-import useSupercluster from "use-supercluster";
-import "./App.css";
-
-const fetcher = (...args) => fetch(...args).then(response => response.json());
-
-const Marker = ({ children }) => children;
-import GoogleMapReact from "google-map-react";
-
+import {
+    withGoogleMap,
+    withScriptjs,
+    GoogleMap,
+    Marker,
+    InfoWindow
+} from "react-google-maps";
 import mapStyles from "./mapStyles";
 // fix this import or create a variable that would be easier to "center the map", later can be updated to person location
 // import LOS_ANGELES_CENTER from './const/la_center.jsx';
