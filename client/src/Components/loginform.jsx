@@ -11,10 +11,9 @@ import {
 class loginforms extends Component {
     state = {
 
-        name: '',
-        lat: '',
-        lng: '',
-        woodData: []
+        username: '',
+        password: '',
+    
     };
     // works-this is what we will use to get the data we need on the maps
 

@@ -35,7 +35,7 @@ const App2 = () => {
                 <Row>
                     <Col xs={12} md={8}>
                         <Card className="mapCard">
-                            <h1 className="gotWood text-center">Got Wood</h1>
+                            <h1 className="gotWood text-center">Locations and prices of know sellers</h1>
                             <hr />
                             <Maps />
                         </Card>
@@ -55,7 +55,7 @@ const App2 = () => {
                                 <Card.Text>
                                     Some quick example text to build on the card title and make up the bulk of
                                     the card's content.
-    </Card.Text>
+                                </Card.Text>
                                 <Button variant="primary">Go somewhere</Button>
                             </Card.Body>
                         </Card>
@@ -66,7 +66,7 @@ const App2 = () => {
                                 <Card.Text>
                                     Some quick example text to build on the card title and make up the bulk of
                                     the card's content.
-    </Card.Text>
+                                </Card.Text>
                                 <Button variant="primary">Go somewhere</Button>
                             </Card.Body>
                         </Card>
@@ -77,7 +77,7 @@ const App2 = () => {
                                 <Card.Text>
                                     Some quick example text to build on the card title and make up the bulk of
                                     the card's content.
-    </Card.Text>
+                                </Card.Text>
                                 <Button variant="primary">Go somewhere</Button>
                             </Card.Body>
                         </Card>
