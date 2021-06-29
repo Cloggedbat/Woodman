@@ -50,7 +50,7 @@ const Header = () => {
               <Button className="login">Login</Button>
 
               <Button className="signUp" href="/SignUp">Sign Up!</Button>
-              <Button className="logOut" href="/auth/logout">log out!</Button>
+              <Button className="logOut" href="/logout">log out!</Button>
               {/* <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-info">Search</Button>
