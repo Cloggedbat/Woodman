@@ -15,16 +15,16 @@ async function db() {
     console.log('error connecting to db: ');
     console.log(error);
   }
-  // const WoodSchema = [
-  //   {
-  //     name: 'john',
-  //     lat: 'jie',
-  //     long: 'ja',
-  //     date: {
-  //       type: String,
-  //       default: Date.now()
-  //     },
-  //   }
-  // ];
+  const WoodSchema = [
+    {
+      name: 'john',
+      lat: 'jie',
+      long: 'ja',
+      date: {
+        type: String,
+        default: Date.now()
+      },
+    }
+  ];
 }
 module.exports = db;

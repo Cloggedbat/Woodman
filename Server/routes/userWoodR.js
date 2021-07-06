@@ -6,9 +6,9 @@ var userWoodD = require("../models/userWoodM")
 const auth = require("../middleware/auth")
 require('dotenv').config()
 
-// auth will be added later
+
 // registering new accounts
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     try {
         const { name, lat, lng } = req.body;
         const newUserWoodD = new userWoodD({
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
         res.status(500).send();
     }
 });
-router.get('/yourdata', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         const customerWood = await userWoodD.find();
         res.json(customerWood)

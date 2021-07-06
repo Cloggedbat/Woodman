@@ -32,15 +32,8 @@ mongoose.connection.on('connected', () => {
 
 // configured routes
 
-app.use(
-    cors({
-        origin: [
-            "http://localhost:3000",
-            "https://mern-auth-template-tutorial.netlify.app",
-        ],
-        credentials: true,
-    })
-); app.use(express.json());
+app.use(cors()); // Use this after the variable declaration
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
 // app.use(routes);

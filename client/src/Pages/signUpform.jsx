@@ -21,8 +21,8 @@ const SignUp = () => {
   const [lastNameValue, setLastNameValue] = useState('');
   const [usernameValue, setUsernameValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const [rePasswordValue, setRetypePasswordValue] = useState('');
   const [streetAddress1Value, setStreetAddress1Value] = useState('');
+  const [streetAddress2Value, setStreetAddress2Value] = useState('');
   const [cityValue, setCityValue] = useState('');
   const [stateValue, setStateValue] = useState('');
   const [zipCodeValue, setZipCodeValue] = useState('');
@@ -39,7 +39,7 @@ const SignUp = () => {
 
   // create function for sign up button and if required fields are not met throw alert error
   const signUpBtn = () => {
-    if (usernameValue === "") {
+    if (firstNameValue === "" || lastNameValue === "" || usernameValue === "" || passwordValue === "" || streetAddress1Value === "" || cityValue === "" || zipCodeValue === "") {
       console.log("Missing required credentials");
       alert("Missing required credentials. Please enter required information");
     } else {
@@ -49,14 +49,21 @@ const SignUp = () => {
         // lastName: lastNameValue,
         username: usernameValue,
         password: passwordValue,
+<<<<<<< HEAD
         passwordVerify: rePasswordValue,
         // streetAddress1: streetAddress1Value,
         // city: cityValue,
         // state: stateValue,
         // zipCode: zipCodeValue
+=======
+        streetAddress1: streetAddress1Value,
+        city: cityValue,
+        state: stateValue,
+        zipCode: zipCodeValue
+>>>>>>> parent of 42ed671 (aaaaaaaaaaaaaa... yea dont no how but i fixed sign up?)
       }
       console.log(userObj);
-      axios.post("/auth/",
+      axios.post("/auth/register",
         userObj
       ).then((res) => {
         console.log("Successfully registered!");
@@ -66,22 +73,22 @@ const SignUp = () => {
         // dispatch({ type: "UPDATE_USERID", payload: res.data.userId });
         // dispatch({ type: "UPDATE_UUID", payload: res.data.uuid });
 
-        // redirectHandler();
-        // console.log("redirected to cam2");
+        redirectHandler();
+        console.log("redirected to cam2");
       }).catch(err => {
         console.log(err);
       });
     }
   }
 
-  // const redirectHandler = () => {
-  //   setRedirect(true);
-  //   console.log("redirect handler: ", redirect);
-  // }
+  const redirectHandler = () => {
+    setRedirect(true);
+    console.log("redirect handler: ", redirect);
+  }
 
-  // if (redirect) {
-  //   // return <Redirect to="/cam2" />
-  // }
+  if (redirect) {
+    // return <Redirect to="/cam2" />
+  }
 
   return (
     <>
@@ -92,7 +99,7 @@ const SignUp = () => {
           <h1 id="pi">Personal Information</h1>
           <hr />
           <Form id="signUp-form">
-            {/* <Form.Row>
+            <Form.Row>
               <Col>
                 <Form.Control
                   placeholder="*First name"
@@ -105,13 +112,13 @@ const SignUp = () => {
                   onChange={(e) => setLastNameValue(e.target.value)}
                 />
               </Col>
-            </Form.Row> */}
+            </Form.Row>
             <Form.Row>
-              <Form.Group as={Col} controlId="username">
+              <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label></Form.Label>
                 <Form.Control
-                  type="username"
-                  placeholder="*Enter userName"
+                  type="email"
+                  placeholder="*Enter email"
                   onChange={(e) => setUsernameValue(e.target.value)}
                 />
               </Form.Group>
@@ -125,33 +132,25 @@ const SignUp = () => {
                 />
               </Form.Group>
             </Form.Row>
-            <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label></Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="*Password Varifyed"
-                onChange={(e) => setRetypePasswordValue(e.target.value)}
-              />
-            </Form.Group>
 
-            {/* <Form.Group controlId="formGridAddress1">
+            <Form.Group controlId="formGridAddress1">
               <Form.Label ></Form.Label>
               <Form.Control
                 placeholder="*Street Address"
                 onChange={(e) => setStreetAddress1Value(e.target.value)}
               />
-            </Form.Group> */}
+            </Form.Group>
 
-            {/* <Form.Group controlId="formGridAddress2">
+            <Form.Group controlId="formGridAddress2">
               <Form.Label></Form.Label>
               <Form.Control
                 placeholder="Apartment, studio, or floor"
                 onChange={(e) => setStreetAddress2Value(e.target.value)}
               />
-            </Form.Group> */}
+            </Form.Group>
 
             <Form.Row>
-              {/* <Form.Group as={Col} controlId="formGridCity">
+              <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label></Form.Label>
                 <Form.Control
                   placeholder="*City"
@@ -226,7 +225,7 @@ const SignUp = () => {
                   placeholder="*Zip Code"
                   onChange={(e) => setZipCodeValue(e.target.value)}
                 />
-              </Form.Group> */}
+              </Form.Group>
             </Form.Row>
           </Form>
           <h6>* required</h6>

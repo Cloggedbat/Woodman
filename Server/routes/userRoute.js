@@ -9,27 +9,29 @@ require('dotenv').config()
 
 
 // registering new accounts
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
+<<<<<<< HEAD
         const { username, password, passwordVerify, displayName } = req.body;
+=======
+        const { username, password, passwordVerify, firstName, lastName } = req.body;
+>>>>>>> parent of 42ed671 (aaaaaaaaaaaaaa... yea dont no how but i fixed sign up?)
         // validations
-        if (!username || !password || !passwordVerify)
+        if (!username || !password || !firstName || !lastName)
 
             // clean this up when we come to style*******************************************************
 
             return res
                 .status(400)
-                .json({ errorMessage: "Please enter all required fields." });
+                .json({ errorMessage: "******Please enter all Req fields******" });
 
         if (password.length < 6)
-            return res.status(400).json({
-
-                errorMessage: "Please enter a password of at least 6 characters.",
-
-
-            });
+            return res
+                .status(400)
+                .json({ errorMessage: "******Please enter all more then 6 characters******" });
 
         if (password !== passwordVerify)
+<<<<<<< HEAD
             return res.status(400).json({
                 errorMessage: "Please enter the same password twice.",
             });
@@ -42,45 +44,54 @@ router.post('/', async (req, res) => {
 
         if (!displayName) displayName = username;
 
+=======
+            return res
+                .status(400)
+                .json({ errorMessage: "******Please enter all more then 6 characters******" });
+>>>>>>> parent of 42ed671 (aaaaaaaaaaaaaa... yea dont no how but i fixed sign up?)
 
-        // hash the password
 
+        const existingUser = await User.findOne({ username })
+        if (existingUser)
+            return res
+                .status(400)
+                .json({ errorMessage: "******account exists******" });
+        // PW hash
         const salt = await bcrypt.genSalt();
-        const passwordHash = await bcrypt.hash(password, salt);
-
-        // save a new user account to the db
+        const passwordHash = await bcrypt.hash(password, salt)
+        console.log(passwordHash)
 
         const newUser = new User({
+<<<<<<< HEAD
             username: username,
             passwordHash: passwordHash,
             displayName
+=======
+            username, passwordHash
+>>>>>>> parent of 42ed671 (aaaaaaaaaaaaaa... yea dont no how but i fixed sign up?)
         });
+        const savedUser = await newUser.save()
+        console.log(savedUser)
 
-        const savedUser = await newUser.save();
+        // login with token
 
-        // sign the token
-
-        const token = jwt.sign(
-            {
-                user: savedUser._id,
-            },
-            process.env.JWT_SECRET
+        const token = jwt.sign({
+            user: savedUser._id,
+        }, process.env.JWT_SECRET
         );
-        console.log(token, 'ewe')
-
-        // send the token in a HTTP-only cookie
-
-        res
-            .cookie("token", token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "none",
-            })
+        // console.log(token, "token")
+        // send token as cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+        })
             .send();
+
+
     } catch (err) {
-        console.error(err, 'wtf');
+        console.error(err)
         res.status(500).send();
     }
+    // console.log(email);
 });
 router.post('/login', async (req, res) => {
     try {
@@ -118,7 +129,7 @@ router.post('/login', async (req, res) => {
 
 
     } catch (err) {
-        console.error(err, 'what the fuck')
+        console.error(err)
         res.status(500).send();
     }
 
