@@ -9,13 +9,9 @@ require('dotenv').config()
 
 
 // registering new accounts
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-<<<<<<< HEAD
-        const { username, password, passwordVerify, displayName } = req.body;
-=======
         const { username, password, passwordVerify, firstName, lastName } = req.body;
->>>>>>> parent of 42ed671 (aaaaaaaaaaaaaa... yea dont no how but i fixed sign up?)
         // validations
         if (!username || !password || !firstName || !lastName)
 
@@ -31,24 +27,9 @@ router.post('/register', async (req, res) => {
                 .json({ errorMessage: "******Please enter all more then 6 characters******" });
 
         if (password !== passwordVerify)
-<<<<<<< HEAD
-            return res.status(400).json({
-                errorMessage: "Please enter the same password twice.",
-            });
-
-        const existingUser = await User.findOne({ username });
-        if (existingUser)
-            return res.status(400).json({
-                errorMessage: "An account with this email already exists.",
-            });
-
-        if (!displayName) displayName = username;
-
-=======
             return res
                 .status(400)
                 .json({ errorMessage: "******Please enter all more then 6 characters******" });
->>>>>>> parent of 42ed671 (aaaaaaaaaaaaaa... yea dont no how but i fixed sign up?)
 
 
         const existingUser = await User.findOne({ username })
@@ -62,13 +43,7 @@ router.post('/register', async (req, res) => {
         console.log(passwordHash)
 
         const newUser = new User({
-<<<<<<< HEAD
-            username: username,
-            passwordHash: passwordHash,
-            displayName
-=======
             username, passwordHash
->>>>>>> parent of 42ed671 (aaaaaaaaaaaaaa... yea dont no how but i fixed sign up?)
         });
         const savedUser = await newUser.save()
         console.log(savedUser)

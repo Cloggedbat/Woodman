@@ -49,18 +49,10 @@ const SignUp = () => {
         // lastName: lastNameValue,
         username: usernameValue,
         password: passwordValue,
-<<<<<<< HEAD
-        passwordVerify: rePasswordValue,
-        // streetAddress1: streetAddress1Value,
-        // city: cityValue,
-        // state: stateValue,
-        // zipCode: zipCodeValue
-=======
         streetAddress1: streetAddress1Value,
         city: cityValue,
         state: stateValue,
         zipCode: zipCodeValue
->>>>>>> parent of 42ed671 (aaaaaaaaaaaaaa... yea dont no how but i fixed sign up?)
       }
       console.log(userObj);
       axios.post("/auth/register",
