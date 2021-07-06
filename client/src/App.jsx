@@ -8,7 +8,7 @@ import forms from './Components/forms'
 import FireMapPage from './Pages/fireDataPage'
 import SignUp from './Pages/signUpform'
 import logdInUser from './Pages/UserHomepage'
-
+import loginforms from './Pages/loginform'
 function App() {
   return (
     <Router>
@@ -29,6 +29,7 @@ function App() {
           <Route exact path='/FireDanger' component={FireMapPage} />
           <Route exact path='/SignUp' component={SignUp} />
           <Route exact path='/SignedIn' component={logdInUser} />
+          <Route exact path='/login' component={loginforms} />
 
         </Switch>
 

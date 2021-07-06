@@ -3,13 +3,15 @@ const router = express.Router();
 const User = require("../models/UserModel")
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
+const auth = require("../middleware/auth");
+
 require('dotenv').config()
 
 
 // registering new accounts
 router.post('/', async (req, res) => {
     try {
-        const { username, password, passwordVerify } = req.body;
+        const { username, password, passwordVerify, displayName } = req.body;
         // validations
         if (!username || !password || !passwordVerify)
 
@@ -38,6 +40,7 @@ router.post('/', async (req, res) => {
                 errorMessage: "An account with this email already exists.",
             });
 
+        if (!displayName) displayName = username;
 
 
         // hash the password
@@ -49,8 +52,8 @@ router.post('/', async (req, res) => {
 
         const newUser = new User({
             username: username,
-            passwordHash: passwordHash
-
+            passwordHash: passwordHash,
+            displayName
         });
 
         const savedUser = await newUser.save();

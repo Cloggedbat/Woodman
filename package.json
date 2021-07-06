@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/Cloggedbat/Woodman#readme",
   "dependencies": {
-    "@react-google-maps/api": "^2.2.0",
+    "react-google-maps": "^2.2.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
@@ -34,6 +34,7 @@
     "mongoose": "^5.12.13",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
+    "react-google-maps": "^9.4.5",
     "react-scripts": "^4.0.3"
   }
 }

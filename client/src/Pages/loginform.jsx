@@ -13,7 +13,7 @@ class loginforms extends Component {
 
         username: '',
         password: '',
-    
+
     };
     // works-this is what we will use to get the data we need on the maps
 
@@ -86,11 +86,11 @@ class loginforms extends Component {
                                         name='name'
                                         value={this.state.name}
                                         onChange={this.handleChange}
-                                        placeholder='name'
+                                        placeholder='Username'
                                     />
                                 </div>
                                 <div className='form-imput'>
-                                    <input name="lat" id="" cols="30" rows="10" value={this.state.lat} onChange={this.handleChange} placeholder='lat  for now'></input>
+                                    <input name="lat" id="" cols="30" rows="10" value={this.state.lat} onChange={this.handleChange} placeholder='Password'></input>
                                 </div>
 
                                 <button >Sub</button>

@@ -6,6 +6,9 @@ import {
     Marker,
     InfoWindow
 } from "react-google-maps";
+// import useSupercluster from "use-supercluster";
+import "./maps.css";
+
 import mapStyles from "./mapStyles";
 // fix this import or create a variable that would be easier to "center the map", later can be updated to person location
 // import LOS_ANGELES_CENTER from './const/la_center.jsx';

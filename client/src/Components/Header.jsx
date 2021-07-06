@@ -32,32 +32,34 @@ const Header = () => {
                 alt="React Bootstrap logo"
               />
 
-
-              {/* <a className="navbar-brand" href="/">
-            <img src={logo}></img>
-          </a> */}
-
-              {/* I would like to change how these look but is not nessisary now.......................Final styleFix */}
-            </Col>
-            <Col>
-              <Nav className="mr-auto text-center">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/forms">Features</Nav.Link>
-                <Nav.Link href="/FireDanger">Pricing</Nav.Link>
-              </Nav>
-            </Col>
-            <Col>
-              <Button className="login">Login</Button>
-
-              <Button className="signUp" href="/SignUp">Sign Up!</Button>
-              <Button className="logOut" href="/logout">log out!</Button>
-              {/* <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info">Search</Button>
-        </Form> */}
             </Col>
           </Row>
         </Navbar.Brand>
+
+        {/* <a className="navbar-brand" href="/">
+            <img src={logo}></img>
+          </a> */}
+
+        {/* I would like to change how these look but is not nessisary now.......................Final styleFix */}
+        <Col>
+          <Nav className="mr-auto text-center">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/forms">Features</Nav.Link>
+            <Nav.Link href="/FireDanger">Pricing</Nav.Link>
+          </Nav>
+        </Col>
+        <Col></Col>
+        <Col></Col>
+
+        <Col>
+          <Button className="logOut" href="/login">Login!</Button>
+          <Button className="signUp" href="/SignUp">Sign Up!</Button>
+          <Button className="logOut" href="/logout">Logout!</Button>
+          {/* <Form inline>
+          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          <Button variant="outline-info">Search</Button>
+        </Form> */}
+        </Col>
       </Navbar>
 
     </>

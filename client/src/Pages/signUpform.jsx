@@ -45,15 +45,15 @@ const SignUp = () => {
     } else {
 
       const userObj = {
-        firstName: firstNameValue,
-        lastName: lastNameValue,
+        // firstName: firstNameValue,
+        // lastName: lastNameValue,
         username: usernameValue,
         password: passwordValue,
         passwordVerify: rePasswordValue,
-        streetAddress1: streetAddress1Value,
-        city: cityValue,
-        state: stateValue,
-        zipCode: zipCodeValue
+        // streetAddress1: streetAddress1Value,
+        // city: cityValue,
+        // state: stateValue,
+        // zipCode: zipCodeValue
       }
       console.log(userObj);
       axios.post("/auth/",
