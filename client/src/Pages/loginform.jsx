@@ -37,31 +37,42 @@ class loginforms extends Component {
         const target = event.target;
         const name = target.name
         const value = target.value
+        const password = target.password
+
 
         this.setState({
-            [name]: value
+            [name]: value,
+            // [password]: value,
+
         })
 
     };
-    submit = (event) => {
+    submit = async (event) => {
         event.preventDefault();
         // sendToWDB = send to Wood DB
-        const sendToWDB = {
+        if (this.state.username === '' || this.state.password === '') {
+            alert("Missing username or password");
+            console.log("Missing username or password");
+        } else {
+            const sendToWDB = {
 
-            date: Date.now(),
-            name: this.state.name,
-            lat: this.state.lat,
-            lng: this.state.lng,
-        };
 
-        axios.post('/save', sendToWDB)
-            .then(() => {
-                console.log('data sent')
-            })
-            .catch(() => {
-                console.log('data not sent')
-            })
+                username: this.state.username,
+                password: this.state.password,
 
+            };
+
+            await axios.post('auth/login', sendToWDB)
+                .then((res) => {
+                    console.log('data sent')
+                    alert('Welcome')
+                })
+                .catch((err) => {
+                    console.log('data not sent')
+                    alert('you are not a registered user')
+                })
+            console.log(sendToWDB, 'state')
+        }
 
         // axios({
         //     url: 'http://localhost:5000/save',
@@ -83,17 +94,21 @@ class loginforms extends Component {
                             <form onSubmit={this.submit} >
                                 <div className='form-imput'>
                                     <input type='text'
-                                        name='name'
+                                        name='username'
                                         value={this.state.name}
                                         onChange={this.handleChange}
                                         placeholder='Username'
                                     />
                                 </div>
                                 <div className='form-imput'>
-                                    <input name="lat" id="" cols="30" rows="10" value={this.state.lat} onChange={this.handleChange} placeholder='Password'></input>
+                                    <input type='text'
+                                        name="password"
+                                        value={this.state.password}
+                                        onChange={this.handleChange}
+                                        placeholder='Password' />
                                 </div>
 
-                                <button >Sub</button>
+                                <button onChange={this.submit} href='/' >Sub</button>
                             </form>
                         </div>
                     </Jumbotron>
