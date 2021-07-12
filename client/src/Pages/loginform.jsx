@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios'
 import {
@@ -7,14 +7,17 @@ import {
     Row
 
 } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
+
 
 class loginforms extends Component {
     state = {
 
         username: '',
         password: '',
-
+        redirect: 'false'
     };
+
     // works-this is what we will use to get the data we need on the maps
 
     // getWoodData = () => {
@@ -66,6 +69,16 @@ class loginforms extends Component {
                 .then((res) => {
                     console.log('data sent')
                     alert('Welcome')
+                    console.log("Redirect to profile");
+                    const redirectHandler = async () => {
+                        this.state.redirect("true");
+                        console.log("redirect handler: ", this.state.redirect);
+                    }
+
+                    if (this.state.redirect) {
+                        return <Redirect to="/forms" />
+                    }
+                    redirectHandler();
                 })
                 .catch((err) => {
                     console.log('data not sent')
@@ -73,7 +86,6 @@ class loginforms extends Component {
                 })
             console.log(sendToWDB, 'state')
         }
-
         // axios({
         //     url: 'http://localhost:5000/save',
         //     method: 'post',
@@ -108,7 +120,7 @@ class loginforms extends Component {
                                         placeholder='Password' />
                                 </div>
 
-                                <button onChange={this.submit} href='/' >Sub</button>
+                                <button onChange={this.submit}  >Sub</button>
                             </form>
                         </div>
                     </Jumbotron>
