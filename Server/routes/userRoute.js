@@ -130,7 +130,20 @@ router.get("/logout", (req, res) => {
 
 });
 
+router.get("/login", (req, res) => {
 
-
+    function auth(req, res, next) {
+        try {
+            const token = req.cookies.token;
+            if (!token)
+                return res.json(false)
+            jwt.verify(token, process.env.JWT_SECRET);
+            res.send(true)
+        } catch (err) {
+            console.error(err);
+            res.json(false)
+        }
+    }
+})
 
 module.exports = router;
