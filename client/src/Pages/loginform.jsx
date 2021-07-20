@@ -2,125 +2,129 @@ import React, { Component, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios'
 import AuthContext from "../context/AuthContext";
-import { useHistory } from "react-router-dom";
 import {
-    Jumbotron,
+    Button,
+    ButtonGroup,
+    Col,
     Container,
-    Row
-
+    Form,
+    Jumbotron
 } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 
-class loginforms extends Component {
-    state = {
+const Loginforms = () => {
+    const [userNameValue, setUsernameValue] = useState(' ');
+    const [passWordValue, setPasswordValue] = useState(' ')
+    const [redirect, setRedirect] = useState(false);
+
+    const goBackBtn = () => {
+        console.log("Hit homepage");
+    }
+    const signUpBtn = () => {
+        if (userNameValue === "") {
+            console.log("Missing required credentials");
+            alert("Missing required credentials. Please enter required information");
+        } else {
+
+            const userObj = {
+                username: userNameValue,
+                password: passWordValue,
+            }
+            console.log(userObj);
+            axios.post('/auth/login',
+                userObj
+            ).then((res) => {
+                console.log("Successfully registered!");
+                console.log(res.data.userId);
+                alert("Successfully Registered! You will receive a welcome email from our team!");
+
+                // dispatch({ type: "UPDATE_USERID", payload: res.data.userId });
+                // dispatch({ type: "UPDATE_UUID", payload: res.data.uuid });
+
+                redirectHandler();
+                console.log("redirected to cam2");
+            }).catch(err => {
+                console.log(err);
+            });
+            //     console.log("login successful");
+            //     alert("Successfully logged in");
 
 
-        username: '',
-        password: '',
-        auth: false
-    };
-
-    handleChange = (event) => {
-        const target = event.target;
-        const name = target.name
-        const value = target.value
-        const password = target.password
-        const auth = target.auth
-        this.setState({
-            [name]: value,
-
-
-        })
-
-    };
-    submit = async (event) => {
-        event.preventDefault();
-        // sendToWDB = send to Wood DB
-        if (this.state.username === '' || this.state.password === '') {
-            alert("Missing username or password");
-            console.log("Missing username or password");
+            // }).catch(err => {
+            //     console.log(err);
+            // });
         }
-        // else if (this.state.username === '' || this.state.password === '') {
-
-        // }
-        else {
-            let auth = true
-            const sendToWDB = {
-                username: this.state.username,
-                password: this.state.password,
-                auth: true
-            };
-
-            await axios.post('auth/login', sendToWDB)
-                .then((res) => {
-                    console.log('data sent')
-                    alert('Welcome')
-                    console.log("Redirect to profile");
-                })
-
-                .catch((err) => {
-                    console.log('data not sent')
-                    alert('you are not a registered user')
-                    // const sendToWDB = {
-                    //     auth: false
-                    // };
-                })
-            console.log(sendToWDB.auth, 'state1')
-            console.log(this.state.auth, 'state2')
-
-        }
-
-
-
-
-        // axios({
-        //     url: 'http://localhost:5000/save',
-        //     method: 'post',
-        //     data: sendToWDB
-        // })
-
-    };
-    redirectHandler = () => {
-
-
     }
 
-    render() {
-        console.log(this.state, 'state')
-        return (
+    const redirectHandler = () => {
+        setRedirect(true);
+        console.log("redirect handler: ", redirect);
+    }
+
+    if (redirect === true) {
+        return <Redirect to="/SignedIn" />
+    }
+
+
+
+    return (
+        <>
+
             <Container id="main-container">
-                <Row>
 
-                    <Jumbotron>
-                        <div>
-                            <h2>Input your information</h2>
-                            <form onSubmit={this.submit} >
-                                <div className='form-imput'>
-                                    <input type='text'
-                                        name='username'
-                                        value={this.state.name}
-                                        onChange={this.handleChange}
-                                        placeholder='Username'
-                                    />
-                                </div>
-                                <div className='form-imput'>
-                                    <input type='text'
-                                        name="password"
-                                        value={this.state.password}
-                                        onChange={this.handleChange}
-                                        placeholder='Password' />
-                                </div>
+                <Jumbotron id="signup-jumbotron">
+                    <h1 id="pi">Personal Information</h1>
+                    <hr />
+                    <Form id="signUp-form">
 
-                                <button onChange={this.submit}  >Sub</button>
-                            </form>
-                        </div>
-                    </Jumbotron>
-                </Row>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="username">
+                                <Form.Label></Form.Label>
+                                <Form.Control
+                                    type="username"
+                                    placeholder="*Enter userName"
+                                    onChange={(e) => setUsernameValue(e.target.value)}
+                                />
+                            </Form.Group>
+
+                            <Form.Group as={Col} controlId="formGridPassword">
+                                <Form.Label></Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="*Password"
+                                    onChange={(e) => setPasswordValue(e.target.value)}
+                                />
+                            </Form.Group>
+                        </Form.Row>
+
+                        <Form.Row>
+
+                        </Form.Row>
+                    </Form>
+                    <h6>* required</h6>
+                    <br />
+
+                    <ButtonGroup size="lg" className="mr-3">
+                        <Button href="/" onClick={() => { goBackBtn() }} variant="dark"
+                            type="submit" id='left-button'>Go Back</Button>
+                    </ButtonGroup>
+
+                    <ButtonGroup size="lg" className="mr-3">
+                        <Button onClick={() => { signUpBtn() }} variant="dark"
+                            type="submit" id='right-button'>Continue</Button>
+                    </ButtonGroup>
+
+                    <br /><br />
+                    <h6>Click 'Continue' </h6>
+                </Jumbotron>
             </Container>
-        );
-    }
-}
+        </>
+    );
+};
 
 
 
-export default loginforms;
+
+
+export default Loginforms;

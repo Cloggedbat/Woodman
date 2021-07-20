@@ -1,6 +1,8 @@
 // Header - Navbar
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../assets/logov2.png'
+import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 import {
   NavDropdown,
   Navbar,
@@ -9,14 +11,19 @@ import {
   FormControl,
   Button,
   Col,
-  Row
-
+  Row,
 } from "react-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap';
 import './header.css'
 
 
 
-const Header = () => {
+function Header() {
+  const { loggedIn } = useContext(AuthContext);
+  let authLinkText = "Sign In";
+  if (loggedIn.id) {
+    authLinkText = "Sign Out"
+  }
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -46,20 +53,28 @@ const Header = () => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/forms">Features</Nav.Link>
             <Nav.Link href="/FireDanger">Pricing</Nav.Link>
+
+
+
+            <LinkContainer to="/login">
+              <Nav.Link>{authLinkText}</Nav.Link>
+            </LinkContainer>
+
+
+
           </Nav>
         </Col>
         <Col></Col>
         <Col></Col>
 
         <Col>
-          <Button className="logOut" href="/login">Login!</Button>
-          <Button className="signUp" href="/SignUp">Sign Up!</Button>
-          <Button className="logOut" href="/logout">Logout!</Button>
+          <Nav className="mr-auto text-center"></Nav>
           {/* <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info">Search</Button>
-        </Form> */}
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-info">Search</Button>
+          </Form> */}
         </Col>
+        {/* </Nav> */}
       </Navbar>
 
     </>

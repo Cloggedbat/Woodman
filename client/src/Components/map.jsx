@@ -8,12 +8,11 @@ import {
 } from "react-google-maps";
 // import useSupercluster from "use-supercluster";
 import "./maps.css";
-
 import mapStyles from "./mapStyles";
 // fix this import or create a variable that would be easier to "center the map", later can be updated to person location
 // import LOS_ANGELES_CENTER from './const/la_center.jsx';
 import iconMarker from "../assets/Campfire.png"
-
+import GeoLocator from './geoloaction'
 import axios from 'axios'
 import './maps.css'
 
@@ -24,9 +23,14 @@ const zionNp = { lat: 37.300064162133154, lng: -113.02748589891031 }
 
 
 
-function Map() {
+const Map = props => {
     const [selectedPark, setSelectedPark] = useState(null);
     const [places, setPlaces] = useState([])
+    // const [location, setLocation] = useState({
+    //     lat: 51.501364,
+    //     lng: -0.141890
+    // })
+
     const FetchPlaces = () => {
         axios.get('/api')
             .then((response) => {
@@ -54,54 +58,79 @@ function Map() {
             window.removeEventListener("keydown", listener);
         };
     }, []);
+    // const success = position => {
+    //     const coordinates = {
+    //         lat: position.coords.latitude,
+    //         lng: position.coords.longitude
+    //     }
+    //     // console.log(position.coords.longitude)
+    //     // console.log(coordinates, "lol this should work")
+    //     setLocation(coordinates)
+    // }
+    // useEffect(() => {
+    //     if (navigator.geolocation) {
+    //         navigator.permissions
+    //             .query({ name: "geolocation" })
+    //             .then(function (result) {
+    //                 if (result.state === "granted") {
+    //                     navigator.geolocation.getCurrentPosition(success)
+    //                 }
+    //             });
+    //     }
+    // }, [])
 
+
+    console.log(GeoLocator(props.lat), "success")
     return (
         <div id="maps">
-
-            <GoogleMap
-                defaultZoom={10}
-                // will look into making this its own variable/ will need to find out how to shift the cinter 
-                defaultCenter={zionNp}
-                defaultOptions={{ styles: mapStyles }}
-            >
-                {places.map((places) => (
-                    <Marker await
-                        icon={{
-                            url: iconMarker,
-                            scaledSize: new window.google.maps.Size(25, 25)
-                        }}
-
-                        position={{
-                            lat: places.lat,
-                            lng: places.lng
-                            // text={place.name}
-                            // show={places.show}
-
-                        }}
-                        onClick={() => {
-                            setSelectedPark(places);
-                        }}
-
-                    />))}{selectedPark && (
-                        <InfoWindow
-                            onCloseClick={() => {
-                                setSelectedPark(null);
+            {places.map((places) => (
+                <GoogleMap
+                    defaultZoom={10}
+                    // will look into making this its own variable/ will need to find out how to shift the cinter 
+                    defaultCenter={
+                        GeoLocator(props)
+                    }
+                    defaultOptions={{ styles: mapStyles }}
+                >
+                    {places.map((places) => (
+                        <Marker await
+                            icon={{
+                                url: iconMarker,
+                                scaledSize: new window.google.maps.Size(25, 25)
                             }}
+
                             position={{
-                                lat: selectedPark.lat,
-                                lng: selectedPark.lng
-                            }}
-                        >
-                            <div>
-                                <h2>{selectedPark.name}</h2>
-                                <p>{selectedPark.address}</p>
-                                <p>{selectedPark.city}</p>
-                                <p>{selectedPark.phoneNumber}</p>
+                                lat: places.lat,
+                                lng: places.lng
+                                // text={place.name}
+                                // show={places.show}
 
-                            </div>
-                        </InfoWindow>
-                    )}
-            </GoogleMap >
+                            }}
+                            onClick={() => {
+                                setSelectedPark(places);
+                            }}
+
+                        />))}{selectedPark && (
+                            <InfoWindow
+                                onCloseClick={() => {
+                                    setSelectedPark(null);
+                                }}
+                                position={{
+                                    lat: selectedPark.lat,
+                                    lng: selectedPark.lng
+                                }}
+                            >
+                                <div>
+                                    <h2>{selectedPark.name}</h2>
+                                    <p>{selectedPark.address}</p>
+                                    <p>{selectedPark.city}</p>
+                                    <p>{selectedPark.phoneNumber}</p>
+
+                                </div>
+                            </InfoWindow>
+                        )}
+                </GoogleMap >
+            ))}
         </div>
     );
 }
