@@ -12,7 +12,7 @@ import mapStyles from "./mapStyles";
 // fix this import or create a variable that would be easier to "center the map", later can be updated to person location
 // import LOS_ANGELES_CENTER from './const/la_center.jsx';
 import iconMarker from "../assets/Campfire.png"
-import GeoLocator from './geoloaction'
+
 import axios from 'axios'
 import './maps.css'
 
@@ -26,10 +26,10 @@ const zionNp = { lat: 37.300064162133154, lng: -113.02748589891031 }
 const Map = props => {
     const [selectedPark, setSelectedPark] = useState(null);
     const [places, setPlaces] = useState([])
-    // const [location, setLocation] = useState({
-    //     lat: 51.501364,
-    //     lng: -0.141890
-    // })
+    const [location, setLocation] = useState({
+        lat: 51.501364,
+        lng: -0.141890
+    })
 
     const FetchPlaces = () => {
         axios.get('/api')
@@ -58,38 +58,42 @@ const Map = props => {
             window.removeEventListener("keydown", listener);
         };
     }, []);
-    // const success = position => {
-    //     const coordinates = {
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude
-    //     }
-    //     // console.log(position.coords.longitude)
-    //     // console.log(coordinates, "lol this should work")
-    //     setLocation(coordinates)
-    // }
-    // useEffect(() => {
-    //     if (navigator.geolocation) {
-    //         navigator.permissions
-    //             .query({ name: "geolocation" })
-    //             .then(function (result) {
-    //                 if (result.state === "granted") {
-    //                     navigator.geolocation.getCurrentPosition(success)
-    //                 }
-    //             });
-    //     }
-    // }, [])
+    const success = position => {
+        const coordinates = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        }
+        // console.log(position.coords.longitude)
+        // console.log(coordinates, "lol this should work")
+        setLocation(coordinates)
+    }
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.permissions
+                .query({ name: "geolocation" })
+                .then(function (result) {
+                    if (result.state === "granted") {
+                        navigator.geolocation.getCurrentPosition(success)
+                    }
+                });
+        }
+    }, [])
 
 
-    console.log(GeoLocator(props.lat), "success")
+    console.log((props.lat), "success")
     return (
         <div id="maps">
-            {places.map((places) => (
+            {location && (
                 <GoogleMap
                     defaultZoom={10}
                     // will look into making this its own variable/ will need to find out how to shift the cinter 
-                    defaultCenter={
-                        GeoLocator(props)
-                    }
+                    await defaultCenter={{
+                        lat: location.lat,
+                        lng: location.lng
+                        // text={place.name}
+                        // show={places.show}
+
+                    }}
                     defaultOptions={{ styles: mapStyles }}
                 >
                     {places.map((places) => (
@@ -130,7 +134,7 @@ const Map = props => {
                             </InfoWindow>
                         )}
                 </GoogleMap >
-            ))}
+            )}
         </div>
     );
 }
