@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     withGoogleMap,
     withScriptjs,
@@ -26,12 +26,35 @@ const zionNp = { lat: 37.300064162133154, lng: -113.02748589891031 }
 const Map = props => {
     const [selectedPark, setSelectedPark] = useState(null);
     const [places, setPlaces] = useState([])
-    const [location, setLocation] = useState({
-        lat: 51.501364,
-        lng: -0.141890
-    })
+    const [location, setLocation] = useState(
+        zionNp
+    )
+    const refMap = useRef(null);
+    const success = async (position) => {
+        const coordinates = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        }
+        // console.log(position.coords.longitude)
+        // console.log(coordinates, "lol this should work")
+        setLocation(coordinates)
+        console.log(coordinates, 'coordinates')
+    }
+    const geoLocate = () => {
+        if (navigator.geolocation) {
+            navigator.permissions
+                .query({ name: "geolocation" })
+                .then(function (result) {
+                    if (result.state === "granted") {
+                        navigator.geolocation.getCurrentPosition(success)
+                    }
+                });
+        }
+    }
+    // useEffect(() => {
 
     const FetchPlaces = () => {
+        geoLocate()
         axios.get('/api')
             .then((response) => {
                 const data = response.data;
@@ -58,38 +81,18 @@ const Map = props => {
             window.removeEventListener("keydown", listener);
         };
     }, []);
-    const success = position => {
-        const coordinates = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        }
-        // console.log(position.coords.longitude)
-        // console.log(coordinates, "lol this should work")
-        setLocation(coordinates)
-    }
-    useEffect(() => {
-        if (navigator.geolocation) {
-            navigator.permissions
-                .query({ name: "geolocation" })
-                .then(function (result) {
-                    if (result.state === "granted") {
-                        navigator.geolocation.getCurrentPosition(success)
-                    }
-                });
-        }
-    }, [])
 
 
-    console.log((props.lat), "success")
+    console.log(location, "success")
     return (
         <div id="maps">
             {location && (
-                <GoogleMap
+                <GoogleMap await
                     defaultZoom={10}
                     // will look into making this its own variable/ will need to find out how to shift the cinter 
-                    await defaultCenter={{
+                    defaultCenter={{
                         lat: location.lat,
-                        lng: location.lng
+                        lng: location  .lng
                         // text={place.name}
                         // show={places.show}
 

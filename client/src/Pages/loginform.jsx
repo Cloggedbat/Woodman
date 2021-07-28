@@ -1,7 +1,5 @@
-import React, { Component, useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import axios from 'axios'
-import AuthContext from "../context/AuthContext";
 import {
     Button,
     ButtonGroup,

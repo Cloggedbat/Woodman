@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-// import ListingForm from '../listings/ListingForm'
+import Map from './map'
 const GeoLocator = props => {
     const [location, setLocation] = useState({
         lat: 51.501364,
@@ -24,10 +24,18 @@ const GeoLocator = props => {
                 });
         }
     }, [])
-    return (
-        <div>
-            {location}
+    return <div>
+        <div className="text-center py-4">
+            <h1 style={{ fontSize: 50 }}>Welcome {props.currentSeller.email.split("@")[0]}</h1>
         </div>
-    )
+        <div className="text-center py-4">
+            <h3>
+                Add a new listing here
+            </h3>
+        </div>
+        <div className="container" style={{ maxWidth: "500px" }}>
+            <Map location={location} />
+        </div>
+    </div>
 }
 export default GeoLocator
