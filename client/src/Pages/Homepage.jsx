@@ -13,11 +13,10 @@ import './home.css'
 import campFireHeroShot from '../assets/243208-800x515r1-types-campfires.webp'
 import arches from '../assets/arches.jpg'
 import cLand from '../assets/cLands.jpg'
-// import HeroSlider from '../components/Navbar/swiper/myIMG';
-// import ressi from '../assets/resume.PNG'
-/// import Swiper from 'react-id-swiper';
+import CostDisplay from '../Components/CostData';
 
-// custom css
+
+
 
 
 
@@ -44,7 +43,7 @@ const App2 = () => {
                         <Jumbotron className="jumbotron1">
                             <h1>This can display data i guess</h1>
                             <hr />
-
+                            <CostDisplay />
                         </Jumbotron>
                     </Col>
                     <Col xs={6} md={4}>

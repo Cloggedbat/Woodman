@@ -92,7 +92,7 @@ const Map = props => {
                     // will look into making this its own variable/ will need to find out how to shift the cinter 
                     defaultCenter={{
                         lat: location.lat,
-                        lng: location  .lng
+                        lng: location.lng
                         // text={place.name}
                         // show={places.show}
 
