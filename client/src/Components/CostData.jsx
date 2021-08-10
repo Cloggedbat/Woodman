@@ -5,41 +5,38 @@ import {
     Row
 
 } from "react-bootstrap";
-import axios from 'axios'
+import axios from 'axios';
 
-require('dotenv').config()
+require('dotenv').config();
 
 
 const CostDisplay = () => {
-    const [topTen, setTopTen] = useState(null);
-    const FetchPlaces = () => {
-        axios.get('/api')
-            .then((response) => {
-                const data = response.data;
-                setTopTen(data.json)
-                console.log(data, 'looking for price')
-            })
-            .catch(() => {
-                console.log('dWood not found')
-            })
-    }
+    const [topTen, setTopTen] = useState([]);
 
     useEffect(() => {
-        //         costData();
+        const FetchPlaces = async () => {
+            const request = await axios.get('/api')
+            console.log(request.data, "request")
+            setTopTen(request.data)
+
+            return request
+
+        };
         FetchPlaces();
-    }, [])
-    // const costData = async () => {
-    //     const obpData = topTen.city
+    }, []);
+    console.log(topTen, "topTeN")
 
 
-    //     console.log(obpData, "obpOBP")
-    // }
+
     return (
         <div>
-            {topTen && (
+            {topTen.map(topT =>(
+                <Card>
+                    <h1>hi{topT.obp}</h1>
+                </Card>
+            ))}
 
-                <Card> </Card>
-            )}
+
         </div >
 
     )
@@ -48,5 +45,7 @@ const CostDisplay = () => {
 
 
 
-}
+};
 export default CostDisplay
+
+
