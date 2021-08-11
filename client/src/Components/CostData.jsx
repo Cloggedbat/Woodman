@@ -16,7 +16,18 @@ const CostDisplay = () => {
     useEffect(() => {
         const FetchPlaces = async () => {
             const request = await axios.get('/api')
-            console.log(request.data, "request")
+            var inserted;
+            var loopData = ''
+          var i ;
+          for(var i = 0, ii = request.data.math; i < ii ; i++){
+            
+              loopData = request.data[i].obp
+            }
+        //   this.setState({userName: loopData})
+            
+            
+            
+            console.log(loopData, "request")
             setTopTen(request.data)
 
             return request
@@ -24,7 +35,6 @@ const CostDisplay = () => {
         };
         FetchPlaces();
     }, []);
-    console.log(topTen, "topTeN")
 
 
 
