@@ -3,6 +3,7 @@ import {
     Card,
     Container,
     Row
+    
 
 } from "react-bootstrap";
 import axios from 'axios';
@@ -16,22 +17,16 @@ const CostDisplay = () => {
     useEffect(() => {
         const FetchPlaces = async () => {
             const request = await axios.get('/api')
-            var inserted;
-            var loopData = ''
-          var i ;
-          for(var i = 0, ii = request.data.math; i < ii ; i++){
-            
-              loopData = request.data[i].obp
-            }
-        //   this.setState({userName: loopData})
-            
-            
-            
-            console.log(loopData, "request")
-            setTopTen(request.data)
+            var loopData =request.data;
+var tTarray = loopData.map(top =>{
+    var obp =top.name + top.obp 
+    return obp
+})
 
+var sortedTTA = tTarray.sort((a,b) => a-b)
+// console.log(sortedTTA,"tt")        
+        setTopTen(sortedTTA)
             return request
-
         };
         FetchPlaces();
     }, []);
@@ -40,11 +35,14 @@ const CostDisplay = () => {
 
     return (
         <div>
-            {topTen.map(topT =>(
                 <Card>
-                    <h1>hi{topT.obp}</h1>
+                    <h1>1  {topTen[0]}</h1>
+                    <h1>2  {topTen[1]}</h1>
+                    <h1>3  {topTen[2]}</h1>
+                    <h1>4  {topTen[3]}</h1>
+                    <h1>5  {topTen[4]}</h1>
                 </Card>
-            ))}
+
 
 
         </div >
