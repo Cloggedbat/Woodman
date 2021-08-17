@@ -19,14 +19,22 @@ const CostDisplay = () => {
             const request = await axios.get('/api')
             var loopData =request.data;
 var tTarray = loopData.map(top =>{
-    var obp =top.name + top.obp 
-    return obp
+    var obp =  top.obp
+    
+    return obp 
 })
+var nameArray = loopData.map(top =>{
+    var obp =  tTarray+top.name
+    return obp 
+})
+console.log(nameArray,"name")
 
 var sortedTTA = tTarray.sort((a,b) => a-b)
-// console.log(sortedTTA,"tt")        
-        setTopTen(sortedTTA)
+console.log(sortedTTA,"tt")        
+        
+setTopTen(sortedTTA)
             return request
+
         };
         FetchPlaces();
     }, []);

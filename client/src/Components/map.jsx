@@ -86,7 +86,7 @@ const Map = props => {
     console.log(location, "success")
     return (
         <div id="maps">
-            {location && (
+            {location.map((location) => (
                 <GoogleMap await
                     defaultZoom={10}
                     // will look into making this its own variable/ will need to find out how to shift the cinter 
@@ -96,9 +96,9 @@ const Map = props => {
                         // text={place.name}
                         // show={places.show}
 
-                    }}
+            }}
                     defaultOptions={{ styles: mapStyles }}
-                >
+                >)
                     {places.map((places) => (
                         <Marker await
                             icon={{
@@ -137,7 +137,7 @@ const Map = props => {
                             </InfoWindow>
                         )}
                 </GoogleMap >
-            )}
+            ))}
         </div>
     );
 }
